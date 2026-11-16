@@ -1,0 +1,114 @@
+/* modules/diary/diary.css */
+.main-content {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.calendar-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    padding: 20px;
+    border: 1px solid var(--border-color);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--background-color);
+}
+
+.calendar-header h2 {
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.calendar-grid {
+    display: flex;
+    flex-direction: column;
+}
+
+.days-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+/* שורת הכותרות (ראשון, שני...) */
+.calendar-grid > .weekday {
+    text-align: center;
+    font-weight: bold;
+    color: var(--text-color);
+    padding: 10px 0;
+    /* כדי שהכותרות ישבו בדיוק מעל העמודות של הגריד */
+    float: right;
+    width: 14.28%;
+}
+
+/* ימי החודש */
+.calendar-day {
+    background: var(--background-color);
+    border-radius: 8px;
+    min-height: 100px;
+    padding: 10px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-day:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.calendar-day.empty {
+    background: transparent;
+    cursor: default;
+}
+.calendar-day.empty:hover {
+    border-color: transparent;
+    transform: none;
+}
+
+.day-number {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.day-indicator {
+    font-size: 0.8rem;
+    color: var(--success-color);
+    margin-top: auto;
+    font-weight: bold;
+}
+
+.day-image-preview {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.day-image-preview img {
+    max-width: 100%;
+    max-height: 250px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 1rem;
+}

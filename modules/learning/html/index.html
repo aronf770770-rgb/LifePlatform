@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>קורס פיתוח אתרים - פלטפורמת החיים</title>
+    <link rel="stylesheet" href="html.css">
+</head>
+<body>
+    <nav class="html-navbar">
+        <div class="nav-brand">קורס פיתוח אתרים (HTML / CSS / JS)</div>
+        <div>
+            <button class="btn btn-ghost" onclick="HTMLApp.resetProgress()">איפוס התקדמות</button>
+            <button class="btn btn-ghost" onclick="window.location.href='../learning.html'">חזור למרכז הלמידה</button>
+        </div>
+    </nav>
+
+    <div class="html-container">
+        <!-- פאנל הוראות -->
+        <div class="instructions-panel">
+            <div class="stage-header">
+                <h2 id="stage-title">טוען שלב...</h2>
+                <span id="stage-badge" class="stage-badge">שלב 1 / 200</span>
+            </div>
+            
+            <div id="stage-content" class="stage-content">
+                טוען הוראות...
+            </div>
+
+            <div class="stage-tasks">
+                <h3>משימות לביצוע:</h3>
+                <ul id="tasks-list" class="tasks-list"></ul>
+            </div>
+            
+            <div class="player-controls">
+                <button class="btn btn-ghost" id="prev-stage-btn" onclick="HTMLApp.prevStage()">&#8594; שלב קודם</button>
+                <button class="btn" id="next-stage-btn" onclick="HTMLApp.nextStage()" disabled>שלב הבא &#8592;</button>
+            </div>
+        </div>
+
+        <!-- פאנל סביבת פיתוח -->
+        <div class="workspace-panel">
+            <div class="editor-section">
+                <div class="editor-tabs">
+                    <button class="tab-btn active" onclick="HTMLApp.switchTab('html')">HTML</button>
+                    <button class="tab-btn" onclick="HTMLApp.switchTab('css')">CSS</button>
+                    <button class="tab-btn" onclick="HTMLApp.switchTab('js')">JS</button>
+                    <button class="btn btn-run" onclick="HTMLApp.runCode()">▶ הרץ קוד</button>
+                </div>
+                
+                <div class="editor-container">
+                    <textarea id="code-html" class="code-textarea active" placeholder="כתוב כאן קוד HTML..."></textarea>
+                    <textarea id="code-css" class="code-textarea" placeholder="כתוב כאן קוד CSS..."></textarea>
+                    <textarea id="code-js" class="code-textarea" placeholder="כתוב כאן קוד JavaScript..."></textarea>
+                </div>
+            </div>
+
+            <!-- פאנל תצוגה מקדימה -->
+            <div class="results-section">
+                <div class="results-header">תצוגה מקדימה במערכת</div>
+                <iframe id="preview-frame" class="preview-iframe"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="html.js"></script>
+</body>
+</html>

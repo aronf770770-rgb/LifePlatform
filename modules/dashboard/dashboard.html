@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ראשי - פלטפורמת החיים</title>
+    <!-- טעינת עיצוב גלובלי ועיצוב מקומי -->
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <!-- AppManager.js יזריק לכאן את התפריט העליון אוטומטית -->
+    
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>ברוך הבא לפלטפורמת החיים</h1>
+            <p>בחר לאן תרצה לנווט היום</p>
+        </header>
+
+        <div class="categories-grid">
+            <a href="../learning/learning.html" class="category-card">
+                <div class="card-icon">📚</div>
+                <h2>מרכז למידה</h2>
+                <p>מוזיקה, תכנות, היסטוריה</p>
+            </a>
+            
+            <a href="../thinking/thinking.html" class="category-card">
+                <div class="card-icon">💡</div>
+                <h2>מרכז חשיבה</h2>
+                <p>פתקים, רשימות, דיונים</p>
+            </a>
+            
+            <a href="../diary/diary.html" class="category-card">
+                <div class="card-icon">📅</div>
+                <h2>יומן אישי</h2>
+                <p>מעקב ורישום יומיומי</p>
+            </a>
+            
+            <a href="../recipes/recipes.html" class="category-card">
+                <div class="card-icon">🍳</div>
+                <h2>מתכונים</h2>
+                <p>ניהול ספר המתכונים שלך</p>
+            </a>
+            
+            <a href="../games/games.html" class="category-card">
+                <div class="card-icon">🎮</div>
+                <h2>משחקים</h2>
+                <p>פאקמן, טטריס ועוד</p>
+            </a>
+            
+            <a href="#" class="category-card" onclick="alert('מודול זה יפותח בהמשך'); return false;">
+                <div class="card-icon">⚙️</div>
+                <h2>שונות</h2>
+                <p>גיבויים והגדרות מערכת</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- טעינת סקריפטים לפי סדר תלות -->
+    <script src="../../js/AppManager.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

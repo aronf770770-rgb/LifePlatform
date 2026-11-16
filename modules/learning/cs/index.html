@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מדעי המחשב - פלטפורמת החיים</title>
+    <link rel="stylesheet" href="cs.css">
+</head>
+<body>
+    <nav class="cs-navbar">
+        <div class="nav-brand">מדעי המחשב ואלגוריתמיקה (Java)</div>
+        <div>
+            <button class="btn btn-ghost" onclick="CSApp.resetProgress()">איפוס התקדמות</button>
+            <button class="btn btn-ghost" onclick="window.location.href='../learning.html'">חזור למרכז הלמידה</button>
+        </div>
+    </nav>
+
+    <div class="cs-container">
+        <!-- פאנל תיאוריה והוראות -->
+        <div class="theory-panel">
+            <div class="stage-header">
+                <h2 id="stage-title">טוען שלב...</h2>
+                <span id="stage-badge" class="stage-badge">שלב 1 / 200</span>
+            </div>
+            
+            <div id="stage-content" class="stage-content">
+                טוען תוכן...
+            </div>
+
+            <div class="stage-tasks">
+                <h3>3 משימות לביצוע:</h3>
+                <ul id="tasks-list" class="tasks-list">
+                    <li><input type="checkbox" id="task-cb-0" class="task-checkbox" disabled> <span id="task-desc-0">משימה 1</span></li>
+                    <li><input type="checkbox" id="task-cb-1" class="task-checkbox" disabled> <span id="task-desc-1">משימה 2</span></li>
+                    <li><input type="checkbox" id="task-cb-2" class="task-checkbox" disabled> <span id="task-desc-2">משימה 3</span></li>
+                </ul>
+            </div>
+            
+            <div class="player-controls">
+                <button class="btn btn-ghost" id="prev-stage-btn" onclick="CSApp.prevStage()">&#8594; שלב קודם</button>
+                <button class="btn" id="next-stage-btn" onclick="CSApp.nextStage()" disabled>שלב הבא &#8592;</button>
+            </div>
+        </div>
+
+        <!-- פאנל סביבת פיתוח Java -->
+        <div class="workspace-panel">
+            <div class="editor-section">
+                <div class="editor-header">
+                    <span>Main.java</span>
+                    <button class="btn btn-run" onclick="CSApp.verifyCode()">▶ קמפל ובדוק לוגיקה</button>
+                </div>
+                
+                <div class="editor-container">
+                    <!-- הוספנו dir="ltr" כדי שהקוד יוצג משמאל לימין כמו שצריך -->
+                    <textarea id="code-java" class="code-textarea" dir="ltr" placeholder="כתוב את קוד ה-Java שלך כאן...
+public class Main {
+    public static void main(String[] args) {
+        
+    }
+}"></textarea>
+                </div>
+            </div>
+
+            <!-- קונסולת פלט ובדיקות -->
+            <div class="console-section">
+                <div class="console-header">Console Output / Compiler</div>
+                <div id="console-output" class="console-output" dir="ltr">
+                    > System ready. Waiting for compilation...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="cs.js"></script>
+</body>
+</html>

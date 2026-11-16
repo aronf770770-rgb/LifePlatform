@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מתכונים - פלטפורמת החיים</title>
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="recipes.css">
+</head>
+<body>
+    <div class="main-content">
+        <div class="header-actions">
+            <h1 id="pageTitle">ספר המתכונים</h1>
+            <div>
+                <button type="button" class="btn btn-ghost" onclick="RecipesManager.openNewCategoryModal()" style="margin-left: 10px;">+ קטגוריה חדשה</button>
+                <button type="button" class="btn" onclick="RecipesManager.openNewRecipeModal()">+ מתכון חדש</button>
+            </div>
+        </div>
+        
+        <div id="categoriesView" class="view-section active">
+            <div id="categoriesGrid" class="categories-grid"></div>
+        </div>
+
+        <div id="recipeListView" class="view-section">
+            <div class="navigation-bar">
+                <button type="button" class="btn btn-ghost" onclick="RecipesManager.showCategoriesView()">&#8594; חזור לקטגוריות</button>
+                <!-- כפתור מחיקת קטגוריה שנוסף -->
+                <button type="button" class="btn-ghost delete-btn" onclick="RecipesManager.deleteCurrentCategory()" style="border:none; color:var(--danger-color);">🗑️ מחק קטגוריה</button>
+            </div>
+            <div id="recipesList" class="recipes-list"></div>
+        </div>
+
+        <div id="singleRecipeView" class="view-section">
+            <div class="navigation-bar">
+                <button type="button" class="btn btn-ghost" id="backToListBtn" onclick="RecipesManager.showListView()">&#8594; חזור לרשימה</button>
+                <button type="button" class="btn-ghost delete-btn" id="deleteRecipeBtn" style="border:none; color:var(--danger-color);">🗑️ מחק מתכון</button>
+            </div>
+            <div id="recipeContent" class="recipe-full-content"></div>
+        </div>
+    </div>
+
+    <!-- מודלים נשארו ללא שינוי מעבר להעתקה -->
+    <div id="newRecipeModal" class="modal-overlay">
+        <div class="modal-content modal-large">
+            <button type="button" class="close-modal">&times;</button>
+            <h2 style="margin-bottom:20px; color:var(--primary-color);">הוספת מתכון חדש</h2>
+            <div class="input-group" style="margin-bottom:15px;"><label style="font-weight:600;">קטגוריה:</label><select id="recipeCategory" style="width:100%; padding:10px; border-radius:6px; border:1px solid var(--border-color);"></select></div>
+            <div class="input-group" style="margin-bottom:15px;"><label style="font-weight:600;">שם המתכון:</label><input type="text" id="recipeTitle" placeholder="לדוגמה: עוגת שוקולד..." required></div>
+            <div class="input-group" style="margin-bottom:15px;"><label style="font-weight:600;">נתיב תמונה (אופציונלי):</label><input type="text" id="recipeImage" placeholder="C:\Pictures\cake.jpg"></div>
+            <div class="input-group" style="margin-bottom:15px;"><label style="font-weight:600;">תוכן המתכון:</label><textarea id="recipeBody" rows="8"></textarea></div>
+            <button type="button" class="btn" onclick="RecipesManager.saveRecipe()" style="width: 100%;">שמור מתכון</button>
+        </div>
+    </div>
+
+    <div id="newCategoryModal" class="modal-overlay">
+        <div class="modal-content">
+            <button type="button" class="close-modal">&times;</button>
+            <h2 style="margin-bottom:20px; color:var(--primary-color);">קטגוריה חדשה</h2>
+            <div class="input-group" style="margin-bottom:15px;"><label style="font-weight:600;">שם הקטגוריה:</label><input type="text" id="newCategoryName"></div>
+            <button type="button" class="btn" onclick="RecipesManager.saveCategory()" style="width: 100%;">שמור קטגוריה</button>
+        </div>
+    </div>
+
+    <script src="../../js/DataService.js"></script>
+    <script src="../../js/AppManager.js"></script>
+    <script src="../../js/ModalUtils.js"></script>
+    <script src="recipes.js"></script>
+</body>
+</html>

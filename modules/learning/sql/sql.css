@@ -1,0 +1,77 @@
+/* modules/learning/sql/sql.css */
+
+:root {
+    --primary-color: #2c3e50;
+    --accent-color: #3498db;
+    --success-color: #27ae60;
+    --danger-color: #e74c3c;
+    --bg-color: #f4f6f8;
+    --border-color: #e0e6ed;
+}
+
+body {
+    margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color); color: #333; height: 100vh; display: flex; flex-direction: column;
+}
+
+.btn {
+    background-color: var(--accent-color); color: white; border: none; padding: 10px 20px;
+    border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 0.95rem; transition: 0.2s;
+}
+.btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn:disabled { background-color: #bdc3c7; cursor: not-allowed; transform: none; }
+.btn-ghost { background: transparent; color: var(--primary-color); border: 2px solid var(--border-color); }
+.btn-run { background-color: var(--success-color); }
+
+.sql-navbar {
+    background-color: var(--primary-color); color: white; padding: 15px 30px;
+    display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.nav-brand { font-size: 1.5rem; font-weight: 800; letter-spacing: 1px; }
+
+.sql-container {
+    display: flex; flex: 1; padding: 20px; gap: 20px; max-width: 1600px; margin: 0 auto; width: 95%; box-sizing: border-box;
+}
+
+/* פאנל הוראות */
+.instructions-panel {
+    flex: 1; background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    display: flex; flex-direction: column; padding: 25px; border: 1px solid var(--border-color);
+}
+.stage-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid #eee; }
+.stage-header h2 { margin: 0; color: var(--primary-color); font-size: 1.4rem; }
+.stage-badge { background-color: #e1f5fe; color: #0277bd; padding: 5px 15px; border-radius: 20px; font-weight: bold; }
+.stage-content { font-size: 1.1rem; line-height: 1.8; color: #444; flex: 1; overflow-y: auto; white-space: pre-wrap; margin-bottom: 20px; }
+
+.stage-tasks { background: #f8f9fa; padding: 15px; border-radius: 8px; border-right: 4px solid var(--accent-color); margin-bottom: 20px; }
+.stage-tasks h3 { margin: 0 0 10px 0; color: var(--primary-color); font-size: 1.1rem; }
+.tasks-list { list-style: none; padding: 0; margin: 0; }
+.tasks-list li { padding: 10px 0; border-bottom: 1px solid #e0e0e0; display: flex; align-items: center; font-size: 1.05rem; }
+.tasks-list li:last-child { border-bottom: none; }
+.task-checkbox { margin-left: 12px; width: 20px; height: 20px; accent-color: var(--success-color); pointer-events: none; }
+
+.player-controls { display: flex; justify-content: space-between; padding-top: 15px; border-top: 1px solid #eee; }
+
+/* סביבת פיתוח */
+.workspace-panel { flex: 1.5; display: flex; flex-direction: column; gap: 20px; }
+.editor-section { flex: 1; display: flex; flex-direction: column; background: #1e1e1e; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+.editor-header { background: #2d2d2d; color: #fff; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; font-weight: 600; }
+.sql-textarea { flex: 1; background: #1e1e1e; color: #d4d4d4; font-family: 'Courier New', Courier, monospace; font-size: 18px; padding: 20px; border: none; resize: none; outline: none; direction: ltr; }
+
+.results-section { flex: 1.2; display: flex; flex-direction: column; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid var(--border-color); }
+.results-header { background: #f1f2f6; padding: 12px 20px; font-weight: 600; color: #555; border-bottom: 1px solid var(--border-color); }
+.sql-results-container { flex: 1; padding: 15px; overflow: auto; direction: ltr; }
+
+/* טבלת תוצאות מקצועית */
+.sql-table { width: 100%; border-collapse: collapse; font-family: 'Segoe UI', Tahoma, sans-serif; text-align: left; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.sql-table th, .sql-table td { border: 1px solid #e0e6ed; padding: 10px 15px; font-size: 0.95rem; }
+.sql-table th { background-color: #f4f6f8; color: #2c3e50; font-weight: 700; position: sticky; top: 0; }
+.sql-table tr:nth-child(even) { background-color: #fafbfc; }
+.sql-table tr:hover { background-color: #f0f4f8; }
+
+.error-msg { color: var(--danger-color); font-weight: bold; background: #fee; padding: 15px; border-radius: 8px; border-left: 5px solid var(--danger-color); text-align: right;}
+.success-msg { color: var(--success-color); font-weight: bold; font-size: 1.1rem; text-align: right;}
+
+.success-toast { position: fixed; bottom: 30px; left: 30px; background: var(--success-color); color: white; padding: 15px 25px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); font-size: 1.1rem; font-weight: 600; z-index: 9999; display: flex; align-items: center; gap: 10px; animation: slideInUp 0.4s ease, fadeOut 0.4s ease 3.5s forwards; }
+@keyframes slideInUp { from { transform: translateY(150%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes fadeOut { to { opacity: 0; transform: translateY(20px); } }

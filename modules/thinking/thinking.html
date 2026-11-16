@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מרכז חשיבה - פלטפורמת החיים</title>
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="thinking.css">
+</head>
+<body>
+    <div class="main-content">
+        <div class="header-actions">
+            <h1>מרכז חשיבה</h1>
+            <button type="button" class="btn" onclick="ThinkingManager.openNewModal()">צור חדש</button>
+        </div>
+        
+        <div id="thoughtsContainer" class="thoughts-grid">
+            <p>טוען נתונים...</p>
+        </div>
+    </div>
+
+    <div id="thoughtModal" class="modal-overlay">
+        <div class="modal-content modal-large">
+            <button type="button" class="close-modal">&times;</button>
+            <h2 id="modalTitle" style="margin-bottom:20px; color:var(--primary-color);">רשומה חדשה</h2>
+            
+            <input type="hidden" id="editThoughtId">
+
+            <div class="input-group" style="margin-bottom:15px;">
+                <label style="font-weight:600; margin-bottom:5px; display:block;">סוג הרשומה:</label>
+                <select id="thoughtType" onchange="ThinkingManager.toggleFormFields()" style="width:100%; padding:10px; border-radius:6px; border:1px solid var(--border-color);">
+                    <option value="note">פתק חופשי</option>
+                    <option value="list">רשימה ממוספרת</option>
+                    <option value="debate">דיון (בעד ונגד)</option>
+                </select>
+            </div>
+
+            <div class="input-group" style="margin-bottom:20px;">
+                <label style="font-weight:600; margin-bottom:5px; display:block;">נושא:</label>
+                <input type="text" id="thoughtTitle" placeholder="הכנס נושא..." required>
+            </div>
+
+            <!-- אזור לפתק -->
+            <div id="noteArea" class="form-section active">
+                <div class="input-group">
+                    <label style="font-weight:600; margin-bottom:5px; display:block;">תוכן הפתק:</label>
+                    <textarea id="noteContent" rows="5" placeholder="כתוב את מחשבותיך כאן..."></textarea>
+                </div>
+            </div>
+
+            <!-- אזור לרשימה דינמית (השדרוג החדש) -->
+            <div id="listArea" class="form-section">
+                <label style="font-weight:600; margin-bottom:10px; display:block;">פריטי הרשימה:</label>
+                <div id="dynamicListContainer" class="dynamic-rows-container"></div>
+                <button type="button" class="btn btn-ghost btn-sm" onclick="ThinkingManager.addListRow()">+ הוסף שורה</button>
+            </div>
+
+            <!-- אזור לדיון דינמי -->
+            <div id="debateArea" class="form-section">
+                <div class="debate-sides">
+                    <div class="debate-side">
+                        <label style="color: var(--success-color); font-weight:bold; margin-bottom:10px; display:block;">טענות בעד:</label>
+                        <div id="prosListContainer" class="debate-rows-container"></div>
+                        <button type="button" class="btn btn-ghost btn-sm" onclick="ThinkingManager.addDebateRow('pro')">+ הוסף טיעון בעד</button>
+                    </div>
+
+                    <div class="debate-side">
+                        <label style="color: var(--danger-color); font-weight:bold; margin-bottom:10px; display:block;">טענות נגד:</label>
+                        <div id="consListContainer" class="debate-rows-container"></div>
+                        <button type="button" class="btn btn-ghost btn-sm" onclick="ThinkingManager.addDebateRow('con')">+ הוסף טיעון נגד</button>
+                    </div>
+                </div>
+
+                <div class="live-graph-preview">
+                    <label style="font-weight:600;">מצב נוכחי:</label>
+                    <div class="debate-graph-container">
+                        <div class="debate-graph">
+                            <div id="liveProBar" class="debate-pro-bar" style="width: 50%;"></div>
+                        </div>
+                        <div class="debate-stats">
+                            <span id="liveProText" class="pro-text">בעד: 0</span>
+                            <span id="liveConText" class="con-text">נגד: 0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn" onclick="ThinkingManager.saveThought()" style="width: 100%; margin-top: 25px;">שמור רשומה</button>
+        </div>
+    </div>
+
+    <script src="../../js/DataService.js"></script>
+    <script src="../../js/AppManager.js"></script>
+    <script src="../../js/ModalUtils.js"></script>
+    <script src="thinking.js"></script>
+</body>
+</html>

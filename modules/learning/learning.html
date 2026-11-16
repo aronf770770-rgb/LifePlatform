@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מרכז למידה - פלטפורמת החיים</title>
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="stylesheet" href="learning.css">
+    <!-- ספריית SQL מובנית לעבודה ישירה בדפדפן -->
+    <script src="https://cdn.jsdelivr.net/npm/alasql@4.3.3/dist/alasql.min.js"></script>
+</head>
+<body>
+    <div class="main-content">
+        <div class="header-actions" id="mainHeaderActions">
+            <h1 id="learningTitle">מרכז למידה</h1>
+            <div id="topActionButtons">
+                <button type="button" class="btn btn-ghost" onclick="LearningManager.openNewCategoryModal()" style="margin-left: 10px;">+ קטגוריה חדשה</button>
+                <button type="button" class="btn" onclick="LearningManager.openNewCourseModal()">+ נושא לימוד חדש</button>
+            </div>
+        </div>
+        
+        <div id="categoriesView" class="view-section active">
+            <div id="categoriesGrid" class="categories-grid"></div>
+        </div>
+
+        <div id="coursesListView" class="view-section">
+            <div class="navigation-bar">
+                <button type="button" class="btn btn-ghost" onclick="LearningManager.showCategoriesView()">&#8594; חזור לקטגוריות</button>
+                <button type="button" class="btn-ghost delete-btn" onclick="LearningManager.deleteCurrentCategory()" style="border:none; color:var(--danger-color);">🗑️ מחק קטגוריה</button>
+            </div>
+            <div id="coursesList" class="courses-list"></div>
+        </div>
+
+        <div id="studyPlayerView" class="view-section">
+            <div class="navigation-bar">
+                <button type="button" class="btn btn-ghost" onclick="LearningManager.showCoursesListView()">&#8594; חזור לרשימת הנושאים</button>
+                <button type="button" class="btn-ghost delete-btn" onclick="LearningManager.deleteCourse()" style="border:none; color:var(--danger-color);">🗑️ מחק קורס זה</button>
+            </div>
+            
+            <div class="ide-container" id="mainStudyContainer">
+                <div class="ide-instructions-panel" id="instructionsPanel">
+                    <div class="stage-header">
+                        <h2 id="courseTitleDisplay">שם הנושא</h2>
+                        <div style="display:flex; align-items:center; gap: 15px;">
+                            <button type="button" class="icon-btn" onclick="LearningManager.openEditStageModal()" title="ערוך שלב והוסף סרטון">✏️ ערוך שלב</button>
+                            <span id="stageProgressDisplay" class="stage-badge">שלב 1</span>
+                        </div>
+                    </div>
+                    
+                    <div id="stageContentDisplay" class="stage-content"></div>
+                    
+                    <div id="stageVideoContainer" class="stage-video-container" style="display:none;"></div>
+
+                    <div id="stageTasksDisplay" class="stage-tasks">
+                        <h3>משימות לביצוע:</h3>
+                        <ul id="tasksList" class="tasks-list"></ul>
+                    </div>
+                    
+                    <div class="player-controls">
+                        <button type="button" class="btn btn-ghost" id="prevStageBtn" onclick="LearningManager.prevStage()">&#8594; שלב קודם</button>
+                        <button type="button" class="btn btn-ghost" onclick="LearningManager.openNewStageModal()" style="border: 1px dashed var(--accent-color);">+ הוסף שלב</button>
+                        <button type="button" class="btn" id="nextStageBtn" onclick="LearningManager.nextStage()" disabled>שלב הבא &#8592;</button>
+                    </div>
+                </div>
+
+                <div class="ide-workspace-panel" id="ideWorkspace">
+                    <div class="code-editor-section">
+                        <div class="editor-tabs" id="editorTabs">
+                            <!-- לשוניות לאתרים -->
+                            <button type="button" class="tab-btn active" onclick="LearningManager.switchTab('html')" id="tab-html">HTML</button>
+                            <button type="button" class="tab-btn" onclick="LearningManager.switchTab('css')" id="tab-css">CSS</button>
+                            <button type="button" class="tab-btn" onclick="LearningManager.switchTab('js')" id="tab-js">JS</button>
+                            <!-- לשונית ל-SQL -->
+                            <button type="button" class="tab-btn" onclick="LearningManager.switchTab('sql')" id="tab-sql" style="display:none;">SQL Query</button>
+                            
+                            <button type="button" class="btn btn-run" onclick="LearningManager.runCode()">▶ הרץ קוד</button>
+                        </div>
+                        <div class="editor-container">
+                            <textarea id="codeHTML" class="code-textarea active" placeholder="כתוב קוד HTML כאן..."></textarea>
+                            <textarea id="codeCSS" class="code-textarea" placeholder="כתוב קוד CSS כאן..."></textarea>
+                            <textarea id="codeJS" class="code-textarea" placeholder="כתוב קוד JavaScript כאן..."></textarea>
+                            <!-- עורך שאילתות -->
+                            <textarea id="codeSQL" class="code-textarea" placeholder="כתוב שאילתת SQL כאן... (למשל SELECT * FROM users)"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="code-preview-section">
+                        <div class="preview-header" id="previewHeaderTitle">תצוגה מקדימה (תוצאה)</div>
+                        <iframe id="codePreviewFrame" class="preview-iframe"></iframe>
+                        <!-- פאנל תוצאות SQL -->
+                        <div id="sqlResultsContainer" style="display:none; padding: 15px; overflow:auto; background:#fff; flex:1;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- מודלים להוספה/עריכה -->
+    <div id="newCourseModal" class="modal-overlay">
+        <div class="modal-content">
+            <button type="button" class="close-modal">&times;</button>
+            <h2 style="color:var(--primary-color); margin-bottom:20px;">נושא לימוד חדש</h2>
+            <div class="input-group" style="margin-bottom:15px;">
+                <label style="font-weight:600;">בחר קטגוריה:</label>
+                <select id="courseCategory" style="width:100%; padding:10px; border-radius:6px; border:1px solid var(--border-color);"></select>
+            </div>
+            <div class="input-group" style="margin-bottom:15px;">
+                <label style="font-weight:600;">שם הנושא:</label>
+                <input type="text" id="courseTitle" required>
+            </div>
+            <button type="button" class="btn" onclick="LearningManager.saveCourse()" style="width: 100%;">שמור והתחל להוסיף שלבים</button>
+        </div>
+    </div>
+
+    <div id="newCategoryModal" class="modal-overlay">
+        <div class="modal-content">
+            <button type="button" class="close-modal">&times;</button>
+            <h2 style="color:var(--primary-color); margin-bottom:20px;">קטגוריה חדשה</h2>
+            <div class="input-group" style="margin-bottom:15px;">
+                <label style="font-weight:600;">שם הקטגוריה:</label>
+                <input type="text" id="newCategoryName" placeholder="למשל: מסדי נתונים, פייתון...">
+            </div>
+            <button type="button" class="btn" onclick="LearningManager.saveCategory()" style="width: 100%;">שמור קטגוריה</button>
+        </div>
+    </div>
+
+    <div id="stageModal" class="modal-overlay">
+        <div class="modal-content modal-large">
+            <button type="button" class="close-modal">&times;</button>
+            <h2 id="stageModalTitle" style="color:var(--primary-color); margin-bottom:15px;">עריכת שלב</h2>
+            
+            <input type="hidden" id="editStageIndex">
+
+            <div class="input-group" style="margin-bottom:15px;">
+                <label style="font-weight:600;">נתיב סרטון וידאו במחשב (אופציונלי):</label>
+                <input type="text" id="stageVideoPath" placeholder="לדוגמה: C:\Videos\lesson1.mp4">
+            </div>
+
+            <div class="input-group" style="margin-bottom:15px;">
+                <label style="font-weight:600;">תוכן השלב / ההוראות:</label>
+                <textarea id="stageContentInput" rows="5"></textarea>
+            </div>
+
+            <div class="input-group" style="margin-bottom:10px;">
+                <label style="font-weight:600;">משימה 1:</label>
+                <input type="text" id="task1Input">
+            </div>
+            <div class="input-group" style="margin-bottom:10px;">
+                <label style="font-weight:600;">משימה 2:</label>
+                <input type="text" id="task2Input">
+            </div>
+
+            <button type="button" class="btn" onclick="LearningManager.saveStage()" style="width: 100%; margin-top:15px;">שמור שלב</button>
+        </div>
+    </div>
+
+    <script src="../../js/DataService.js"></script>
+    <script src="../../js/AppManager.js"></script>
+    <script src="../../js/ModalUtils.js"></script>
+    <script src="learning.js"></script>
+</body>
+</html>

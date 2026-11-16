@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Master - סביבת פיתוח ולמידה</title>
+    <link rel="stylesheet" href="sql.css">
+    <!-- ספריית AlaSQL לניהול מסדי נתונים לוקאליים בדפדפן -->
+    <script src="https://cdn.jsdelivr.net/npm/alasql@4.3.3/dist/alasql.min.js"></script>
+</head>
+<body>
+    <div class="sql-navbar">
+        <div class="nav-brand">SQL Master 💻</div>
+        <div class="nav-links">
+            <a href="../learning.html" class="btn btn-ghost">חזור למרכז הלמידה</a>
+            <button class="btn" onclick="SQLApp.resetDatabase()" style="background-color: var(--danger-color); margin-right: 15px;">איפוס מסד הנתונים</button>
+        </div>
+    </div>
+
+    <div class="sql-container">
+        <!-- פאנל הלמידה (הוראות ומשימות) -->
+        <div class="instructions-panel">
+            <div class="stage-header">
+                <h2>קורס SQL מקיף</h2>
+                <span id="stage-badge" class="stage-badge">שלב 1 / 150</span>
+            </div>
+            
+            <div id="stage-content" class="stage-content">
+                טוען הוראות...
+            </div>
+
+            <div class="stage-tasks">
+                <h3>משימה נוכחית:</h3>
+                <ul id="tasks-list" class="tasks-list"></ul>
+            </div>
+            
+            <div class="player-controls">
+                <button class="btn btn-ghost" onclick="SQLApp.prevStage()">&#8594; הקודם</button>
+                <button class="btn" id="next-stage-btn" onclick="SQLApp.nextStage()" disabled>הבא &#8592;</button>
+            </div>
+        </div>
+
+        <!-- פאנל סביבת העבודה (עורך וקונסולה) -->
+        <div class="workspace-panel">
+            <div class="editor-section">
+                <div class="editor-header">
+                    <span>עורך שאילתות (Query Editor)</span>
+                    <button class="btn btn-run" onclick="SQLApp.runQuery()">▶ הרץ שאילתה</button>
+                </div>
+                <textarea id="sql-editor" class="sql-textarea" placeholder="SELECT * FROM table_name;"></textarea>
+            </div>
+            
+            <div class="results-section">
+                <div class="results-header">תוצאות מסד הנתונים (Results)</div>
+                <div id="sql-results" class="sql-results-container">
+                    <p style="color: #7f8c8d; text-align: center; margin-top: 50px;">הרצו שאילתה כדי לראות תוצאות כאן.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="sql.js"></script>
+</body>
+</html>

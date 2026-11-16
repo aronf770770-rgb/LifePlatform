@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>טטריס - פלטפורמת החיים</title>
+    <!-- נתיבים יחסיים לתיקייה הראשית -->
+    <link rel="stylesheet" href="../../../../css/global.css">
+    <link rel="stylesheet" href="tetris.css">
+</head>
+<body class="game-mode">
+    <div class="main-content">
+        <div class="header-actions">
+            <h1>טטריס (Tetris) 🧱</h1>
+            <button type="button" class="btn btn-ghost" onclick="window.location.href='../../games.html'">&#8594; חזור למשחקים</button>
+        </div>
+        
+        <div class="game-container">
+            <div class="score-board">
+                <div class="stats-col">
+                    <span>ניקוד: <span id="score">0</span></span>
+                    <span style="font-size: 0.9rem; color: #7f8c8d;">שורות: <span id="lines">0</span></span>
+                </div>
+                <div class="stats-col">
+                    <span>שיא: <span id="highScore" style="color: var(--accent-color);">0</span></span>
+                    <span style="font-size: 0.9rem; color: #9b59b6;">רמה: <span id="level">1</span></span>
+                </div>
+            </div>
+            
+            <!-- לוח המשחק - בטטריס הפרופורציה היא תמיד 1:2 (10 משבצות רוחב על 20 גובה) -->
+            <div class="canvas-wrapper">
+                <canvas id="gameCanvas" width="250" height="500"></canvas>
+            </div>
+            
+            <div class="controls">
+                <button type="button" id="startBtn" class="btn">התחל משחק</button>
+                <p class="help-text">
+                    <strong>↑</strong> לסיבוב | <strong>← →</strong> לתזוזה | <strong>↓</strong> להאצת הנפילה
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- טעינת DataService לשמירת השיא -->
+    <script src="../../../../js/DataService.js"></script>
+    <script src="tetris.js"></script>
+</body>
+</html>

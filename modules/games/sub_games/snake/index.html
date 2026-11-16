@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>סנייק - פלטפורמת החיים</title>
+    <link rel="stylesheet" href="../../../../css/global.css">
+    <link rel="stylesheet" href="snake.css">
+</head>
+<body class="game-mode">
+    <div class="main-content">
+        <div class="header-actions">
+            <h1>סנייק - מסע העולמות 🐍</h1>
+            <button type="button" class="btn btn-ghost" onclick="window.location.href='../../games.html'">&#8594; חזור למשחקים</button>
+        </div>
+        
+        <div class="game-container">
+            <div class="score-board">
+                <span>שלב: <span id="levelDisplay" style="color: #9b59b6;">1</span></span>
+                <span>ניקוד: <span id="score">0</span></span>
+                <span>שיא: <span id="highScore" style="color: var(--accent-color);">0</span></span>
+            </div>
+            
+            <!-- לוח המשחק -->
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+            
+            <div class="controls">
+                <button type="button" id="startBtn" class="btn">התחל משחק</button>
+                <p class="help-text">השתמש בחיצי המקלדת. כל 150 נקודות ייפתח פורטל לעולם הבא!</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../../../js/DataService.js"></script>
+    <script src="snake.js"></script>
+</body>
+</html>
